@@ -1,0 +1,15 @@
+FROM node:22-bookworm-slim
+
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
+COPY src ./src
+ENV HIVEMIND_COMPUTER_POOL_HOST=0.0.0.0 \
+    HIVEMIND_COMPUTER_POOL_PORT=8789 \
+    HIVEMIND_COMPUTER_POOL_STATE_DIR=/var/lib/hm-computer-pool \
+    E2B_TEMPLATE_NAME=hm-computer-operator-canary-v5
+VOLUME ["/var/lib/hm-computer-pool"]
+EXPOSE 8789
+HEALTHCHECK --interval=15s --timeout=3s --start-period=10s --retries=3 \
+  CMD ["node", "-e", "fetch('http://127.0.0.1:8789/healthz').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+CMD ["npm", "run", "pool-server"]

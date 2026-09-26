@@ -1,0 +1,28 @@
+services:
+  computer-pool:
+    build:
+      context: .
+      dockerfile: Dockerfile.pool
+    image: hivemind-computer-use:local
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${HIVEMIND_COMPUTER_POOL_HOST_PORT:-8789}:8789"
+    environment:
+      E2B_API_KEY: ${E2B_API_KEY:?Set E2B_API_KEY in the invoking shell}
+      HIVEMIND_COMPUTER_POOL_CONTROL_TOKEN: ${HIVEMIND_COMPUTER_POOL_CONTROL_TOKEN:?Set a local-only control token in the invoking shell}
+      HIVEMIND_COMPUTER_POOL_HOST: 0.0.0.0
+      HIVEMIND_COMPUTER_POOL_PORT: 8789
+      HIVEMIND_COMPUTER_POOL_STATE_DIR: /var/lib/hm-computer-pool
+      HIVEMIND_COMPUTER_POOL_MAX_ACTIVE: ${HIVEMIND_COMPUTER_POOL_MAX_ACTIVE:-2}
+      E2B_TEMPLATE_NAME: ${E2B_TEMPLATE_NAME:-hm-computer-operator-canary-v5}
+      HM_JEV_CANARY: ${HM_JEV_CANARY:-0}
+      CLOUDFLARE_AI_GATEWAY_ENABLED: ${CLOUDFLARE_AI_GATEWAY_ENABLED:-false}
+      CLOUDFLARE_ACCOUNT_ID: ${CLOUDFLARE_ACCOUNT_ID:-}
+      CLOUDFLARE_AI_GATEWAY_ID: ${CLOUDFLARE_AI_GATEWAY_ID:-}
+      CLOUDFLARE_AI_GATEWAY_TOKEN: ${CLOUDFLARE_AI_GATEWAY_TOKEN:-}
+      CLOUDFLARE_AI_GATEWAY_JEV_PROVIDER: ${CLOUDFLARE_AI_GATEWAY_JEV_PROVIDER:-decision-jev}
+      CLOUDFLARE_AI_GATEWAY_JEV_BYOK_ALIAS: ${CLOUDFLARE_AI_GATEWAY_JEV_BYOK_ALIAS:-default}
+    volumes:
+      - hm-computer-pool-state:/var/lib/hm-computer-pool
+volumes:
+  hm-computer-pool-state:

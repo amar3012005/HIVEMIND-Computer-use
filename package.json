@@ -1,0 +1,30 @@
+{
+  "name": "hivemind-computer-use",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22 <23"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "canary": "node src/run-canary.mjs",
+    "v1": "node src/run-v1.mjs",
+    "build:dom-template": "node src/build-dom-template.mjs",
+    "dom-canary": "node src/run-dom-canary.mjs",
+    "public-jev-canary": "node src/run-public-jev-canary.mjs",
+    "pool-canary": "node src/run-pool-canary.mjs",
+    "pool-client-canary": "node src/run-pool-client-canary.mjs",
+    "pool-server": "node src/run-pool-server.mjs",
+    "computer-executor": "node src/run-computer-executor.mjs",
+    "local-direct-jev-browser-canary": "node src/run-local-direct-jev-browser-canary.mjs",
+    "local-public-readonly-canary": "node src/run-local-public-readonly-canary.mjs",
+    "whole-desktop-ocr-canary": "node src/run-whole-desktop-ocr-canary.mjs",
+    "resume": "node src/resume-lease.mjs",
+    "open-stream": "node src/open-stream-proxy.mjs"
+  },
+  "dependencies": {
+    "@e2b/desktop": "2.4.0",
+    "playwright-core": "1.55.0"
+  }
+}

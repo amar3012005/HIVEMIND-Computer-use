@@ -1,0 +1,8 @@
+node_modules/
+evidence/*
+!evidence/2026-09-25-local-iana-pool-canary.md
+!evidence/2026-09-26-standalone-iana-canary.md
+.env*
+!.env.example
+pool-state/
+receipts/

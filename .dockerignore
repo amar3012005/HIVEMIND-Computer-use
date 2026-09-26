@@ -1,0 +1,10 @@
+.env*
+**/.env*
+node_modules
+evidence
+receipts
+pool-state
+.pytest_cache
+test
+template
+README.md
